@@ -1,0 +1,6 @@
+node_modules/
+Redis/
+package.json
+package-lock.json
+enviornment.js
+.env

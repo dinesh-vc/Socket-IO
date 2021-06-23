@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Counter</title>
+</head>
+
+<body>
+    <h1 id="counter"></h1>
+
+        <button id="red" value="red" onclick="color(this.value)">Red</button>
+        <button id="blue" value="blue" onclick="color(this.value)">Blue</button>
+        <button id="green" value="green" onclick="color(this.value)">Green</button>
+
+    <h3 id="counterRed"></h3>
+    <h3 id="counterBlue"></h3>
+    <h3 id="counterGreen"></h3>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        
+        function color(name){
+            console.log(name)
+            socket.emit('color', name) 
+        }
+
+        socket.on('userCounter', function (counter) {
+            document.getElementById('counter').innerHTML = "Online Active User = " +counter;
+        });
+
+        socket.on('colorBlue', function (counter) {
+            document.getElementById('counterBlue').innerHTML = "Blue Counter :" +counter;
+        });
+
+        socket.on('colorRed', function (counter) {
+        
+            document.getElementById('counterRed').innerHTML = "Red Counter :" +counter;
+        });
+        
+        socket.on('colorGreen', function (counter) {
+            document.getElementById('counterGreen').innerHTML = "Green Counter :" +counter;
+        });
+    </script>
+</body>
+
+</html>
